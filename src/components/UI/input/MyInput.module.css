@@ -1,0 +1,10 @@
+.myInput {
+    padding: 5px 15px;
+    margin: 5px 16px;
+    height: 36px;
+    border: 0 transparent;
+    color: var(--tg-theme-text-color);;
+    background: var(--tg-theme-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+}

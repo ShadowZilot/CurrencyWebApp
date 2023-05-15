@@ -1,0 +1,26 @@
+.selector_button {
+    background: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    width: auto;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 12px 12px 0 0;
+    border: 0;
+    font-size: 16px;
+    margin-right: 16px;
+    margin-left: 16px;
+    padding: 10px 16px 9px;
+}
+
+.selector_button:disabled,
+.selector_button[disabled]{
+    background: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    width: auto;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 12px 12px 0 0;
+    border: 0;
+    margin-right: 16px;
+    margin-left: 16px;
+    font-size: 16px;
+    padding: 10px 16px 9px;
+}

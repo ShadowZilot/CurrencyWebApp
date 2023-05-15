@@ -1,0 +1,20 @@
+.selector_container {
+    margin-top: 16px;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+.selector_divider {
+    display: flex;
+    margin-right: 8px;
+    margin-left: 8px;
+    margin-top: 0;
+}
+
+.selector_outer {
+    justify-content: center;
+}
