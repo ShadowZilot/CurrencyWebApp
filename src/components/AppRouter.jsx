@@ -9,10 +9,13 @@ const AppRouter = () => {
     const router = useNavigate()
 
     useEffect(() => {
+        Telegram.WebApp.MainButton.setText("Записать сделку")
         if (location.pathname === "/") {
             Telegram.WebApp.BackButton.hide()
+            Telegram.WebApp.MainButton.show()
         } else {
             Telegram.WebApp.BackButton.show()
+            Telegram.WebApp.MainButton.hide()
         }
     }, [location])
 

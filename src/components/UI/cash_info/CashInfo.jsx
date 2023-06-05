@@ -19,7 +19,6 @@ const CashInfo = () => {
         setProfit(response)
     })
 
-
     useEffect(() => {
         cash().then(r => {
         })
