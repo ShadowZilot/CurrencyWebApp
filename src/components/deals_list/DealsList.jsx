@@ -30,7 +30,7 @@ const DealsList = (props) => {
                         <div>
                             {
                                 dealList.map((item) =>
-                                    <BuyItem purchase={item}/>
+                                    <BuyItem key={item.id} purchase={item}/>
                                 )
                             }
                         </div>

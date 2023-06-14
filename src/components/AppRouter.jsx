@@ -16,6 +16,10 @@ const AppRouter = () => {
         if (location.pathname === "/") {
             Telegram.WebApp.BackButton.hide()
             Telegram.WebApp.MainButton.show()
+            MainButton.setActionToMainButton(() => {
+                    router("/add_deal")
+                }
+            )
         } else {
             Telegram.WebApp.BackButton.show()
             Telegram.WebApp.MainButton.hide()
@@ -26,10 +30,6 @@ const AppRouter = () => {
         Telegram.WebApp.BackButton.onClick(() => {
             router(-1)
         })
-        MainButton.setActionToMainButton(() => {
-                router("/add_deal")
-            }
-        )
     }, [])
 
     return (

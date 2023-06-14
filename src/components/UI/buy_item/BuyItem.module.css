@@ -1,12 +1,25 @@
 .purchase_container {
     display: flex;
-    width: 50vw;
+    width: 100%;
     flex-direction: column;
+    flex-wrap: nowrap;
 }
 
 .main_purchase_container {
     display: flex;
+    position: relative;
+    left: -15%;
+    width: 90%;
+    align-self: center;
+    margin-left: 16px;
+    margin-right: 16px;
+    padding-right: 16px;
+    padding-left: 16px;
     flex-direction: row;
-    flex-wrap: nowrap;
     align-items: center;
+    border: 0;
+    margin-top: 8px;
+    background: var(--tg-theme-bg-color);
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    border-radius: 12px;
 }

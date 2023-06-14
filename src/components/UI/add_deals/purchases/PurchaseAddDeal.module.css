@@ -1,0 +1,8 @@
+.purchase_add_deal_title {
+    margin-left: 16px;
+}
+
+.purchase_input_container {
+    display: flex;
+    flex-direction: row;
+}

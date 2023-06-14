@@ -6,7 +6,7 @@ const BuyItem = (props) => {
         <div className={cl.main_purchase_container}>
             <div className={cl.purchase_container}>
                 <h4>{props.purchase.amount}</h4>
-                <hr width={"100vw"}/>
+                <hr width={"100%"}/>
                 <h4>{props.purchase.amount_ruble}</h4>
             </div>
             <h4>{props.purchase.rate}</h4>

@@ -1,14 +1,29 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import '../styles/AddDealScreen.css';
 import DealSelector from "../components/UI/deals_selector/DealSelector";
+import PurchaseAddDeal from "../components/UI/add_deals/purchases/PurchaseAddDeal";
 
 const AddDealScreen = () => {
+    const [dealType, setDealType] = useState(0)
+    useEffect(() => {
+        Telegram.WebApp.MainButton.show()
+    }, [])
+
     return (
         <div>
             <h3 className="add_deal_title">Запись сделки</h3>
             <DealSelector selectorChanged={(selection) => {
-                alert(selection)
+                setDealType(selection)
             }}/>
+            {
+                dealType === 0 ? <PurchaseAddDeal/> : <div/>
+            }
+            {
+                dealType === 1 ? <PurchaseAddDeal/> : <div/>
+            }
+            {
+                dealType === 2 ? <PurchaseAddDeal/> : <div/>
+            }
         </div>
     );
 };
