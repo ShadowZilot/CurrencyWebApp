@@ -1,7 +1,10 @@
 import React, {useEffect} from 'react';
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import MainScreen from "../pages/MainScreen";
-import EditCahs from "../pages/EditCash";
+import EditCash from "../pages/EditCash";
+import AddDealScreen from "../pages/AddDealScreen";
+import MainButton from "../helpers/MainButton";
+
 
 const AppRouter = () => {
 
@@ -23,12 +26,17 @@ const AppRouter = () => {
         Telegram.WebApp.BackButton.onClick(() => {
             router(-1)
         })
+        MainButton.setActionToMainButton(() => {
+                router("/add_deal")
+            }
+        )
     }, [])
 
     return (
         <Routes>
             <Route path="/" element={<MainScreen/>}/>
-            <Route path="/edit_cash" element={<EditCahs/>}/>
+            <Route path="/edit_cash" element={<EditCash/>}/>
+            <Route path="/add_deal" element={<AddDealScreen/>}/>
         </Routes>
     );
 };

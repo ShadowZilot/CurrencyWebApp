@@ -7,7 +7,14 @@ import BuyItem from "../UI/buy_item/BuyItem";
 const DealsList = (props) => {
     const [dealList, setDealList] = useState([])
     const [loadDealList, isLoadingList, errorList] = useFetching(async () => {
-        const response = await DealLists.buyList(Date.now())
+        let response
+        if (props.selectedType === 0) {
+            response = await DealLists.buyList(Date.now())
+        } else if (props.selectedType === 1) {
+            response = await DealLists.salesList(Date.now())
+        } else {
+            response = await DealLists.mixingList(Date.now())
+        }
         setDealList(response)
     })
     useEffect(() => {

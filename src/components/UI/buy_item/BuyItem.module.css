@@ -1,5 +1,6 @@
 .purchase_container {
     display: flex;
+    width: 50vw;
     flex-direction: column;
 }
 
