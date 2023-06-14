@@ -1,25 +1,39 @@
 .purchase_container {
-    display: flex;
+    position: relative;
+    float: left;
     width: 100%;
-    flex-direction: column;
     flex-wrap: nowrap;
+}
+
+.item_divider {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    width: 100%;
+    float: left;
+}
+
+.buy_item_text {
+    margin: 0 0 0 0.2em;
+    padding: 0;
 }
 
 .main_purchase_container {
     display: flex;
     position: relative;
-    left: -15%;
-    width: 90%;
+    left: 0;
+    width: 80vw;
     align-self: center;
-    margin-left: 16px;
-    margin-right: 16px;
-    padding-right: 16px;
-    padding-left: 16px;
+    margin-left: 1em;
+    margin-right: 1em;
+    padding-right: 1em;
+    padding-left: 1em;
     flex-direction: row;
     align-items: center;
-    border: 0;
+    box-sizing: border-box;
     margin-top: 8px;
     background: var(--tg-theme-bg-color);
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
-    border-radius: 12px;
+    border-radius: 1em;
 }
