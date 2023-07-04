@@ -1,32 +1,35 @@
-.purchase_container {
+.sale_container {
     position: relative;
     float: left;
     width: 100%;
     flex-wrap: nowrap;
 }
 
-.buy_item_text {
-    margin: 0 0 0 0.2em;
+.sale_item_text {
+    margin: 0 0 0 0;
     padding: 0;
 }
 
 .date_text {
     width: fit-content;
     position: absolute;
-    float: left;
-    left: 80%;
+    float: right;
+    left: 85%;
 }
 
 .rate_text {
     display: flex;
     flex-direction: row;
     width: fit-content;
+    white-space: nowrap;
+    overflow: hidden;
     position: relative;
+    font-size: 0.9em;
+    margin-left: 0.6em;
     float: left;
-    margin-left: 1em;
 }
 
-.buy_bottom_text {
+.sale_bottom_text {
     margin: 0 0 0 0.2em;
     padding: 0;
     border-top: white solid 0.04em;
@@ -34,23 +37,22 @@
     width: fit-content;
 }
 
-.inner_purchase_container {
+.inner_sale_container {
     width: fit-content;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.main_purchase_container {
+.main_sale_container {
     display: flex;
     position: relative;
     left: 0;
-    width: 80vw;
+    width: 90vw;
     align-self: center;
     margin-left: 1em;
     margin-right: 1em;
-    padding-right: 1em;
-    padding-left: 1em;
+    padding: 1em;
     flex-direction: row;
     align-items: center;
     box-sizing: border-box;

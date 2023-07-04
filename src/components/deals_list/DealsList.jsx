@@ -3,6 +3,7 @@ import {useFetching} from "../../hooks/useFetching";
 import DealLists from "../../API/DealLists";
 import cl from "./DealsList.module.css"
 import BuyItem from "../UI/buy_item/BuyItem";
+import SaleItem from "../UI/sale_item/SaleItem";
 
 const DealsList = (props) => {
     const [dealList, setDealList] = useState([])
@@ -29,9 +30,14 @@ const DealsList = (props) => {
                     {dealList.length === 0 ? <h4>Сделок не было</h4> :
                         <div>
                             {
-                                dealList.map((item) =>
+                                props.selectedType === 0 ? dealList.map((item) =>
                                     <BuyItem key={item.id} purchase={item}/>
-                                )
+                                ) : <div></div>
+                            }
+                            {
+                                props.selectedType === 1 ? dealList.map((item) =>
+                                    <SaleItem key={item.id} sale={item}/>
+                                ) : <div></div>
                             }
                         </div>
                     }

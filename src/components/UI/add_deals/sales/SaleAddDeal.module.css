@@ -1,0 +1,8 @@
+.sale_add_deal_title {
+    margin-left: 16px;
+}
+
+.sale_input_container {
+    display: flex;
+    flex-direction: row;
+}
