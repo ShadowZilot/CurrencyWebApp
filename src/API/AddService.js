@@ -2,6 +2,17 @@ import axios from "axios";
 import {base_url} from "./APIBase";
 
 export default class AddService {
+    static async addMixingDeal(mixingObj) {
+        await axios.post(
+            `${base_url}/mixing/add`,
+            mixingObj,
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            }
+        )
+    }
 
     static async addPurchaseDeal(purchaseObj) {
         await axios.post(

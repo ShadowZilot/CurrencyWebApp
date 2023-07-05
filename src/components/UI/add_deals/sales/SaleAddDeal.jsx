@@ -49,7 +49,7 @@ const SaleAddDeal = () => {
             </div>
             <h4 className={cl.sale_add_deal_title}>По курсу</h4>
             <div className={cl.sale_input_container}>
-                <MyInput value={saleRate} inputMode="numeric"
+                <MyInput value={saleRate} inputMode="decimal"
                          onChange={(e) => setRate(e.target.value)}></MyInput>
                 { saleRate !== 0 ? <p>{(saleRate - average).toFixed(2)}</p> : <div></div>}
             </div>

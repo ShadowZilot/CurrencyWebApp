@@ -4,6 +4,7 @@ import DealLists from "../../API/DealLists";
 import cl from "./DealsList.module.css"
 import BuyItem from "../UI/buy_item/BuyItem";
 import SaleItem from "../UI/sale_item/SaleItem";
+import MixingItem from "../UI/mixing_item/MixingItem";
 
 const DealsList = (props) => {
     const [dealList, setDealList] = useState([])
@@ -37,6 +38,11 @@ const DealsList = (props) => {
                             {
                                 props.selectedType === 1 ? dealList.map((item) =>
                                     <SaleItem key={item.id} sale={item}/>
+                                ) : <div></div>
+                            }
+                            {
+                                props.selectedType === 2 ? dealList.map((item) =>
+                                    <MixingItem key={item.id} mixing={item}/>
                                 ) : <div></div>
                             }
                         </div>

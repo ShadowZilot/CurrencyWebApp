@@ -1,0 +1,63 @@
+.mixing_container {
+    position: relative;
+    float: left;
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+.mixing_item_text {
+    margin: 0 0 0 0;
+    padding: 0;
+}
+
+.date_text {
+    width: fit-content;
+    position: absolute;
+    float: right;
+    left: 85%;
+}
+
+.rate_text {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    font-size: 0.9em;
+    margin-left: 0.6em;
+    float: left;
+}
+
+.mixing_bottom_text {
+    margin: 0 0 0 0.2em;
+    padding: 0;
+    border-top: white solid 0.04em;
+    font-weight: bold;
+    width: fit-content;
+}
+
+.inner_mixing_container {
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.main_mixing_container {
+    display: flex;
+    position: relative;
+    left: 0;
+    width: 90vw;
+    align-self: center;
+    margin-left: 1em;
+    margin-right: 1em;
+    padding: 1em;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: 8px;
+    background: var(--tg-theme-bg-color);
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    border-radius: 1em;
+}

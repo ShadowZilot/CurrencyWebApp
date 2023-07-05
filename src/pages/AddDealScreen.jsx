@@ -3,6 +3,7 @@ import '../styles/AddDealScreen.css';
 import DealSelector from "../components/UI/deals_selector/DealSelector";
 import PurchaseAddDeal from "../components/UI/add_deals/purchases/PurchaseAddDeal";
 import SaleAddDeal from "../components/UI/add_deals/sales/SaleAddDeal";
+import MixingAddDeal from "../components/UI/add_deals/mixing/MixingAddDeal";
 
 const AddDealScreen = () => {
     const [dealType, setDealType] = useState(0)
@@ -23,7 +24,7 @@ const AddDealScreen = () => {
                 dealType === 1 ? <SaleAddDeal/> : <div/>
             }
             {
-                dealType === 2 ? <PurchaseAddDeal/> : <div/>
+                dealType === 2 ? <MixingAddDeal/> : <div/>
             }
         </div>
     );
