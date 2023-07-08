@@ -10,7 +10,9 @@ function MainScreen() {
         <div>
             <CashInfo/>
             <DealSelector selectorChanged={(selection) => {
+                console.log(`Current selected type = ${selection}`)
                 setSelectedType(selection)
+                console.log(`Past selected type = ${selectedType}`)
             }}/>
             <DealsList selectedType={selectedType}/>
         </div>

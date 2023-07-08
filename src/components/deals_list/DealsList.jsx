@@ -9,19 +9,19 @@ import MixingItem from "../UI/mixing_item/MixingItem";
 const DealsList = (props) => {
     const [dealList, setDealList] = useState([])
     const [loadDealList, isLoadingList, errorList] = useFetching(async () => {
-        let response
+        let response = []
         if (props.selectedType === 0) {
             response = await DealLists.buyList(Date.now())
         } else if (props.selectedType === 1) {
             response = await DealLists.salesList(Date.now())
-        } else {
+        } else if (props.selectedType === 2) {
             response = await DealLists.mixingList(Date.now())
         }
         setDealList(response)
     })
+
     useEffect(() => {
-        loadDealList().then(r => {
-        })
+        loadDealList()
     }, [props.selectedType])
 
     return (

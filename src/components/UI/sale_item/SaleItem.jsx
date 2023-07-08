@@ -13,7 +13,7 @@ const SaleItem = (props) => {
                         <p className={cl.sale_bottom_text}>{Intl.NumberFormat("ru-RU").format(props.sale.amount_ruble)} ₽</p>
                     </div>
                 </div>
-                <p className={cl.rate_text}>{`${props.sale.rate.toFixed(2)} (${props.sale.profit_rate}) = ${Intl.NumberFormat("ru-RU").format(props.sale.profit)}`}</p>
+                <p className={cl.rate_text}>{`${props.sale.rate} (${props.sale.profit_rate}) = ${Intl.NumberFormat("ru-RU").format(props.sale.profit)}`}</p>
                 <p className={cl.date_text}>{DateLabel.dateLabel(props.sale.transaction_date)}</p>
             </div>
         </div>
