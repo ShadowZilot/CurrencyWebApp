@@ -4,6 +4,7 @@ import MainScreen from "../pages/MainScreen";
 import EditCash from "../pages/EditCash";
 import AddDealScreen from "../pages/AddDealScreen";
 import MainButton from "../helpers/MainButton";
+import EditPurchaseDeal from "../pages/EditPurchaseDeal";
 
 
 const AppRouter = () => {
@@ -37,6 +38,7 @@ const AppRouter = () => {
             <Route path="/" element={<MainScreen/>}/>
             <Route path="/edit_cash" element={<EditCash/>}/>
             <Route path="/add_deal" element={<AddDealScreen/>}/>
+            <Route path="/edit_purchase/:id" element={<EditPurchaseDeal/>}/>
         </Routes>
     );
 };

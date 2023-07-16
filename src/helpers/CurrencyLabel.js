@@ -5,8 +5,10 @@ export default class CurrencyLabel {
             return "$"
         } else if (currencyCode === "eur") {
             return "€"
+        } else if (currencyCode === "ust") {
+            return "₮"
         } else {
-            return "₽"
+            return ""
         }
     }
 }

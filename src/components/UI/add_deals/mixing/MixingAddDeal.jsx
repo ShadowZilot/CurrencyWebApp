@@ -32,8 +32,9 @@ const MixingAddDeal = () => {
                          onChange={(e) => setAmount(e.target.value)}></MyInput>
                 <select value={currency}
                         onChange={(e) => setCurrency(e.target.value)}>
-                    <option>USD</option>
-                    <option>EUR</option>
+                    <option value="usd">USD</option>
+                    <option value="eur">EUR</option>
+                    <option value="ust">USDT</option>
                 </select>
             </div>
             <h4 className={cl.sale_add_deal_title}>Прибыль</h4>

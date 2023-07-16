@@ -1,0 +1,45 @@
+.background_tint {
+    background-color: var(--tg-theme-text-color);
+    background-blend-mode: multiply;
+}
+
+.custom_select {
+    appearance: none;
+    padding: 5px 15px;
+    margin: 5px 16px;
+    height: 36px;
+    background: url("/assets/drop_item.svg") no-repeat;
+    background-position: calc(100%) center !important;
+    border: none;
+    font-size: 1rem;
+    border: 0 transparent;
+    color: var(--tg-theme-text-color);
+}
+
+.custom_select:active {
+    appearance: none;
+    padding: 5px 15px;
+    margin: 5px 16px;
+    height: 36px;
+    background: url("/assets/drop_item.svg") no-repeat;
+    background-position: calc(100%) center !important;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    border: 0 transparent;
+    color: var(--tg-theme-text-color);
+}
+
+.custom_select:focus {
+    appearance: none;
+    padding: 5px 15px;
+    margin: 5px 16px;
+    height: 36px;
+    background: url("/assets/drop_item.svg") no-repeat;
+    background-position: calc(100%) center !important;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    border: 0 transparent;
+    color: var(--tg-theme-text-color);
+}

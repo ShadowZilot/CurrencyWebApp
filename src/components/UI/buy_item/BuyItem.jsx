@@ -2,10 +2,12 @@ import React from 'react';
 import cl from "./BuyItem.module.css"
 import CurrencyLabel from "../../../helpers/CurrencyLabel";
 import DateLabel from "../../../helpers/DateLabel";
+import {useNavigate} from "react-router-dom";
 
 const BuyItem = (props) => {
+    const router = useNavigate()
     return (
-        <div>
+        <div onClick={() => router(`/edit_purchase/${props.purchase.id}`)}>
             {
                 props.purchase !== null ? <div className={cl.main_purchase_container}>
                     <div className={cl.inner_purchase_container}>

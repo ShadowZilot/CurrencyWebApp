@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 const PurchaseAddDeal = () => {
     const [amount, setAmount] = useState(0)
     const [purchaseRate, setRate] = useState(0.0)
-    const [currency, setCurrency] = useState("USD")
+    const [currency, setCurrency] = useState("usd")
     const router = useNavigate()
     useEffect(() => {
         MainButton.setActionToMainButton(() => {
@@ -32,13 +32,14 @@ const PurchaseAddDeal = () => {
                          onChange={(e) => setAmount(e.target.value)}></MyInput>
                 <select value={currency}
                         onChange={(e) => setCurrency(e.target.value)}>
-                    <option>USD</option>
-                    <option>EUR</option>
+                    <option value="usd">USD</option>
+                    <option value="eur">EUR</option>
+                    <option value="ust">USDT</option>
                 </select>
             </div>
             <h4 className={cl.purchase_add_deal_title}>По курсу</h4>
             <div>
-                <MyInput value={purchaseRate} inputMode="numeric"
+                <MyInput value={purchaseRate} inputMode="decimal"
                          onChange={(e) => setRate(e.target.value)}></MyInput>
             </div>
             <h3 className={cl.purchase_add_deal_title}>Сумма рубля: {Intl.NumberFormat("ru-RU").format(amount * purchaseRate)}</h3>
