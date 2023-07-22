@@ -43,8 +43,8 @@ const EditCash = () => {
                 comment: ""
             }
         ).then((r) => {
+            Telegram.WebApp.showAlert("Касса изменена!")
             router(-1)
-            alert("Касса изменена!")
         })
     }
 

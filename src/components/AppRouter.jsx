@@ -5,6 +5,8 @@ import EditCash from "../pages/EditCash";
 import AddDealScreen from "../pages/AddDealScreen";
 import MainButton from "../helpers/MainButton";
 import EditPurchaseDeal from "../pages/EditPurchaseDeal";
+import EditMixingDeal from "../pages/EditMixingDeal";
+import EditSaleDeal from "../pages/EditSaleDeal";
 
 
 const AppRouter = () => {
@@ -39,6 +41,8 @@ const AppRouter = () => {
             <Route path="/edit_cash" element={<EditCash/>}/>
             <Route path="/add_deal" element={<AddDealScreen/>}/>
             <Route path="/edit_purchase/:id" element={<EditPurchaseDeal/>}/>
+            <Route path="/edit_mixing/:id" element={<EditMixingDeal/>}/>
+            <Route path="/edit_sale/:id" element={<EditSaleDeal/>}/>
         </Routes>
     );
 };

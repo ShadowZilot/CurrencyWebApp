@@ -2,10 +2,12 @@ import React from 'react';
 import cl from "./SaleItem.module.css";
 import CurrencyLabel from "../../../helpers/CurrencyLabel";
 import DateLabel from "../../../helpers/DateLabel";
+import {useNavigate} from "react-router-dom";
 
 const SaleItem = (props) => {
+    const router = useNavigate()
     return (
-        <div>
+        <div onClick={() => router(`/edit_sale/${props.sale.id}`)}>
             <div className={cl.main_sale_container}>
                 <div className={cl.inner_sale_container}>
                     <div className={cl.sale_container}>

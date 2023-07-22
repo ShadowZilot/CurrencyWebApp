@@ -1,29 +1,41 @@
 import React, {useEffect, useState} from 'react';
-import '../styles/EditPurchaseDealStyles.css'
 import {useNavigate, useParams} from "react-router-dom";
 import MainButton from "../helpers/MainButton";
-import MyInput from "../components/UI/input/MyInput";
-import MySelect from "../components/UI/my_select/MySelect";
+import '../styles/EditSaleDealStyle.css'
+import EditTransaction from "../API/EditTransaction";
 import {useFetching} from "../hooks/useFetching";
 import TransactionSingle from "../API/TransactionSingle";
 import DateLabel from "../helpers/DateLabel";
-import EditTransaction from "../API/EditTransaction";
+import MyInput from "../components/UI/input/MyInput";
+import MySelect from "../components/UI/my_select/MySelect";
+import AverageRate from "../API/AverageRate";
 
-const EditPurchaseDeal = () => {
+const EditSaleDeal = () => {
     const router = useNavigate()
     const {id} = useParams()
     const [amount, setAmount] = useState(0)
     const [rate, setRate] = useState(0)
-    const [currency, setCurrency] = useState("usd")
+    const [currency, setCurrency] = useState("")
     const [time, setTime] = useState(0)
+    const [average, setAverage] = useState(0)
+    useEffect(() => {
+        async function fetchAverageRate() {
+            const tmp = await AverageRate.rate(currency.toLowerCase())
+            setAverage(tmp)
+        }
+
+        fetchAverageRate().then(r => {
+        })
+    }, [currency])
     useEffect(() => {
         MainButton.setActionToMainButton(() => {
-            EditTransaction.editPurchase(
+            EditTransaction.editSale(
                 {
                     "id": id,
                     "dealer": Telegram.WebApp.initDataUnsafe.user.username,
                     "amount": amount,
                     "rate": rate,
+                    "average": average,
                     "currency": currency.toLowerCase(),
                     "comment": "",
                     "transaction_date": time
@@ -33,12 +45,12 @@ const EditPurchaseDeal = () => {
                 router(-1)
             })
         })
-    }, [amount, currency, rate])
+    }, [amount, currency, rate, average])
     useEffect(() => {
-        purchase().then({})
+        sale().then({})
     }, [])
-    const [purchase, isLoadingPurchase, errorList] = useFetching(async () => {
-        let response = await TransactionSingle.purchaseById(id)
+    const [sale, isLoadingSale, errorList] = useFetching(async () => {
+        let response = await TransactionSingle.saleById(id)
         setAmount(response.amount)
         setRate(response.rate)
         setCurrency(response.currency)
@@ -50,27 +62,27 @@ const EditPurchaseDeal = () => {
         }
     })
     return (
-        <div className="edit_purchase_main">
+        <div className="edit_sale_main">
             {
-                isLoadingPurchase ? <h4>Загрузка...</h4> : <div>
+                isLoadingSale ? <h4>Загрузка...</h4> : <div>
                     <h2 style={{
                         position: 'relative',
                         width: 'fit-content', height: 'fit-content',
                         left: '50%', transform: 'translateX(-50%)'
                     }}>Детали сделки</h2>
                     <div className="center_container">
-                        <div className="edit_purchase_top_container">
-                            <div className="edit_purchase_label_name">
-                                <p style={{flex: '0 0 1.8em'}}>Купили</p>
+                        <div className="edit_sale_top_container">
+                            <div className="edit_sale_label_name">
+                                <p style={{flex: '0 0 1.8em'}}>Продали</p>
                             </div>
                             <p style={{
                                 marginLeft: 'auto', marginBottom: '0',
                                 marginTop: '0', fontSize: '1.25rem', fontWeight: '700'
                             }}>{DateLabel.dateLabel(time)}</p>
                         </div>
-                        <hr className="edit_purchase_top_divider"/>
-                        <div className="purchase_input_row_container">
-                            <div className="purchase_input_row_container" style={{
+                        <hr className="edit_sale_top_divider"/>
+                        <div className="sale_input_row_container">
+                            <div className="sale_input_row_container" style={{
                                 width: '80%', marginTop: '0',
                                 height: '2.625em',
                                 background: 'var(--tg-theme-bg-color)',
@@ -97,7 +109,19 @@ const EditPurchaseDeal = () => {
                             }} value={rate}
                                      onChange={(e) => setRate((e.target.value))}/>
                         </div>
-                        <p style={{fontSize: '1em', fontWeight: '500'}}>Сумма в рубле: {rate * amount}</p>
+                        <p style={{fontSize: '1em', fontWeight: '500'}}>Сумма в
+                            рубле: {Intl.NumberFormat("ru-RU").format(rate * amount)}</p>
+                        <div style={{marginTop: '0', display: 'flex', flexDirection: 'row'}}>
+                            <p style={{
+                                fontSize: '1em',
+                                fontWeight: '500'
+                            }}>Прибыль: {Intl.NumberFormat("ru-RU").format(amount * (rate - average))}</p>
+                            <p style={{
+                                marginLeft: '1em',
+                                fontSize: '1em',
+                                fontWeight: '500'
+                            }}>({(rate - average).toFixed(2)})</p>
+                        </div>
                     </div>
                 </div>
             }
@@ -105,4 +129,4 @@ const EditPurchaseDeal = () => {
     );
 };
 
-export default EditPurchaseDeal;
+export default EditSaleDeal;

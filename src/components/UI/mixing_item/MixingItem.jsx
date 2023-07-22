@@ -2,10 +2,12 @@ import React from 'react';
 import cl from "./MixingItem.module.css"
 import CurrencyLabel from "../../../helpers/CurrencyLabel";
 import DateLabel from "../../../helpers/DateLabel";
+import {useNavigate} from "react-router-dom";
 
 const MixingItem = (props) => {
+    const router = useNavigate()
     return (
-        <div>
+        <div onClick={() => router(`/edit_mixing/${props.mixing.id}`)}>
             <div className={cl.main_mixing_container}>
                 <div className={cl.inner_mixing_container}>
                     <div className={cl.mixing_container}>

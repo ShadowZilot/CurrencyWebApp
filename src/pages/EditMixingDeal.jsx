@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import '../styles/EditPurchaseDealStyles.css'
+import '../styles/EditMixingDealStyles.css'
 import {useNavigate, useParams} from "react-router-dom";
 import MainButton from "../helpers/MainButton";
 import MyInput from "../components/UI/input/MyInput";
@@ -9,69 +9,66 @@ import TransactionSingle from "../API/TransactionSingle";
 import DateLabel from "../helpers/DateLabel";
 import EditTransaction from "../API/EditTransaction";
 
-const EditPurchaseDeal = () => {
+const EditMixingDeal = () => {
     const router = useNavigate()
     const {id} = useParams()
     const [amount, setAmount] = useState(0)
-    const [rate, setRate] = useState(0)
+    const [profit, setProfit] = useState(0)
     const [currency, setCurrency] = useState("usd")
     const [time, setTime] = useState(0)
-    useEffect(() => {
-        MainButton.setActionToMainButton(() => {
-            EditTransaction.editPurchase(
-                {
-                    "id": id,
-                    "dealer": Telegram.WebApp.initDataUnsafe.user.username,
-                    "amount": amount,
-                    "rate": rate,
-                    "currency": currency.toLowerCase(),
-                    "comment": "",
-                    "transaction_date": time
-                }
-            ).then(() => {
-                Telegram.WebApp.showAlert("Сделка отредактирована")
-                router(-1)
-            })
-        })
-    }, [amount, currency, rate])
-    useEffect(() => {
-        purchase().then({})
-    }, [])
-    const [purchase, isLoadingPurchase, errorList] = useFetching(async () => {
-        let response = await TransactionSingle.purchaseById(id)
+    const [mixing, isLoadingMixing, errorList] = useFetching(async () => {
+        let response = await TransactionSingle.mixingById(id)
         setAmount(response.amount)
-        setRate(response.rate)
+        setProfit(response.profit)
         setCurrency(response.currency)
         setTime(response.transaction_date)
-        let isCanEdit = await EditTransaction.isCanEdit(response.transaction_date)
-        if (isCanEdit.is_edit) {
-            Telegram.WebApp.MainButton.show()
-            Telegram.WebApp.MainButton.setText("Применить")
-        }
     })
+    useEffect(() => {
+            MainButton.setActionToMainButton(() => {
+                EditTransaction.editMixing(
+                    {
+                        "id": id,
+                        "dealer": Telegram.WebApp.initDataUnsafe.user.username,
+                        "amount": amount,
+                        "profit": profit,
+                        "currency": currency.toLowerCase(),
+                        "comment": "",
+                        "transaction_date": time
+                    }
+                ).then(() => {
+                    Telegram.WebApp.showAlert("Сделка отредактирована")
+                    router(-1)
+                })
+            })
+    }, [amount, currency, profit])
+    useEffect(() => {
+        Telegram.WebApp.MainButton.show()
+        Telegram.WebApp.MainButton.setText("Применить")
+        mixing().then({})
+    }, [])
     return (
-        <div className="edit_purchase_main">
+        <div className="edit_mixing_main">
             {
-                isLoadingPurchase ? <h4>Загрузка...</h4> : <div>
+                isLoadingMixing ? <h4>Загрузка...</h4> : <div>
                     <h2 style={{
                         position: 'relative',
                         width: 'fit-content', height: 'fit-content',
                         left: '50%', transform: 'translateX(-50%)'
                     }}>Детали сделки</h2>
-                    <div className="center_container">
-                        <div className="edit_purchase_top_container">
-                            <div className="edit_purchase_label_name">
-                                <p style={{flex: '0 0 1.8em'}}>Купили</p>
+                    <div className="mixing_center_container">
+                        <div className="edit_mixing_top_container">
+                            <div className="edit_mixing_label_name">
+                                <p style={{flex: '0 0 1.8em'}}>Прочее</p>
                             </div>
                             <p style={{
                                 marginLeft: 'auto', marginBottom: '0',
                                 marginTop: '0', fontSize: '1.25rem', fontWeight: '700'
                             }}>{DateLabel.dateLabel(time)}</p>
                         </div>
-                        <hr className="edit_purchase_top_divider"/>
-                        <div className="purchase_input_row_container">
-                            <div className="purchase_input_row_container" style={{
-                                width: '80%', marginTop: '0',
+                        <hr className="edit_mixing_top_divider"/>
+                        <div className="mixing_input_row_container">
+                            <div className="mixing_input_row_container" style={{
+                                width: '100%', marginTop: '0',
                                 height: '2.625em',
                                 background: 'var(--tg-theme-bg-color)',
                                 borderRadius: '12px', boxShadow: '0 3px 3px rgba(0,0,0,0.2)'
@@ -91,13 +88,11 @@ const EditPurchaseDeal = () => {
                                     <option value="ust">USDT</option>
                                 </MySelect>
                             </div>
-                            <MyInput style={{
-                                width: '20%', marginLeft: '1.5em',
-                                marginRight: 'auto'
-                            }} value={rate}
-                                     onChange={(e) => setRate((e.target.value))}/>
                         </div>
-                        <p style={{fontSize: '1em', fontWeight: '500'}}>Сумма в рубле: {rate * amount}</p>
+                        <MyInput style={{height: '2.625em', width: '100%',
+                            marginTop: '1em', boxSizing: 'border-box'}} inputMode="numeric"
+                                 value={profit}
+                                 onChange={(e) => setProfit(e.target.value)}/>
                     </div>
                 </div>
             }
@@ -105,4 +100,4 @@ const EditPurchaseDeal = () => {
     );
 };
 
-export default EditPurchaseDeal;
+export default EditMixingDeal;
