@@ -1,0 +1,20 @@
+.main_container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.day_label {
+    text-align: center;
+    font-size: 0.94em;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.profit_label {
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: -0.8em;
+    font-weight: 300;
+    line-height: normal;
+}

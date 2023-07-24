@@ -11,11 +11,11 @@ const DealsList = (props) => {
     const [loadDealList, isLoadingList, errorList] = useFetching(async () => {
         let response = []
         if (props.selectedType === 0) {
-            response = await DealLists.buyList(Date.now())
+            response = await DealLists.buyList(props.time)
         } else if (props.selectedType === 1) {
-            response = await DealLists.salesList(Date.now())
+            response = await DealLists.salesList(props.time)
         } else if (props.selectedType === 2) {
-            response = await DealLists.mixingList(Date.now())
+            response = await DealLists.mixingList(props.time)
         }
         setDealList(response)
     })

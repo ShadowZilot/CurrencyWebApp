@@ -1,6 +1,6 @@
 .myInput {
     padding: 5px 15px;
-    /*margin: 5px 16px;*/
+    height: 2.625em;
     border: 0 transparent;
     color: var(--tg-theme-text-color);;
     background: var(--tg-theme-bg-color);

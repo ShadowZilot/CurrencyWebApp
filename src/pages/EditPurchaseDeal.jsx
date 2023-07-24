@@ -12,6 +12,7 @@ import EditTransaction from "../API/EditTransaction";
 const EditPurchaseDeal = () => {
     const router = useNavigate()
     const {id} = useParams()
+    const [isEdit, setIsEdit] = useState(false)
     const [amount, setAmount] = useState(0)
     const [rate, setRate] = useState(0)
     const [currency, setCurrency] = useState("usd")
@@ -44,6 +45,7 @@ const EditPurchaseDeal = () => {
         setCurrency(response.currency)
         setTime(response.transaction_date)
         let isCanEdit = await EditTransaction.isCanEdit(response.transaction_date)
+        setIsEdit(isCanEdit.is_edit)
         if (isCanEdit.is_edit) {
             Telegram.WebApp.MainButton.show()
             Telegram.WebApp.MainButton.setText("Применить")
@@ -97,7 +99,28 @@ const EditPurchaseDeal = () => {
                             }} value={rate}
                                      onChange={(e) => setRate((e.target.value))}/>
                         </div>
-                        <p style={{fontSize: '1em', fontWeight: '500'}}>Сумма в рубле: {rate * amount}</p>
+                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                            <p style={{fontSize: '1em', marginRight: 'auto', fontWeight: '500'}}>Сумма в
+                                рубле: {rate * amount}</p>
+                            {isEdit ? <span className="material-symbols-outlined"
+                                            style={{marginLeft: 'auto', marginTop: '0.5em'}}
+                                            onClick={(e) => Telegram.WebApp.showConfirm(
+                                                "Вы действительно хотите удалить сделку?",
+                                                (result) => {
+                                                    if (result) {
+                                                        EditTransaction.deleteDeal(
+                                                            id,
+                                                            "purchase"
+                                                        ).then(() => {
+                                                            Telegram.WebApp.showAlert("Сделка удалена!")
+                                                            router(-1)
+                                                        })
+                                                    }
+                                                }
+                                            )}>
+                            delete
+                        </span> : <div></div>}
+                        </div>
                     </div>
                 </div>
             }

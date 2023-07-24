@@ -7,6 +7,7 @@ import MainButton from "../helpers/MainButton";
 import EditPurchaseDeal from "../pages/EditPurchaseDeal";
 import EditMixingDeal from "../pages/EditMixingDeal";
 import EditSaleDeal from "../pages/EditSaleDeal";
+import HistoryPage from "../pages/HistoryPage";
 
 
 const AppRouter = () => {
@@ -43,6 +44,8 @@ const AppRouter = () => {
             <Route path="/edit_purchase/:id" element={<EditPurchaseDeal/>}/>
             <Route path="/edit_mixing/:id" element={<EditMixingDeal/>}/>
             <Route path="/edit_sale/:id" element={<EditSaleDeal/>}/>
+            <Route path="/history" element={<HistoryPage/>}/>
+            <Route path="/day/:time" element={<MainScreen/>}/>
         </Routes>
     );
 };

@@ -52,27 +52,36 @@ const EditCash = () => {
         <div>
             <h3 className="edit_cash_title">Редактирование кассы</h3>
             <h5 className="currency_label">Рубль</h5>
-            <MyInput type="text" inputMode="decimal"
+            <MyInput style={{marginLeft: '16px'}} type="text" inputMode="decimal"
                      pattern="\d*" value={ruble} onChange={(e) => setRuble(e.target.value)}/>
             <h5 className="currency_label">Доллары</h5>
             <div className="field_container">
-                <MyInput type="text" inputMode="decimal" pattern="\d*"
+                <MyInput style={{marginLeft: '16px'}} type="text" inputMode="decimal" pattern="\d*"
                          value={dollar} onChange={(e) => setDollar(e.target.value)}/>
-                <MyInput style={{width: '55px'}} type="text" inputMode="decimal" pattern="\d*"
+                <MyInput style={{
+                    marginLeft: 'auto', marginRight: '16px',
+                    width: '55px'
+                }} type="text" inputMode="decimal" pattern="\d*"
                          value={averageDollar} onChange={(e) => setAverageDollar(e.target.value)}/>
             </div>
             <h5 className="currency_label">Eвро</h5>
             <div className="field_container">
-                <MyInput type="text" inputMode="decimal" pattern="\d*"
+                <MyInput style={{marginLeft: '16px'}} type="text" inputMode="decimal" pattern="\d*"
                          value={euro} onChange={(e) => setEuro(e.target.value)}/>
-                <MyInput style={{width: '55px'}} type="text" inputMode="decimal" pattern="\d*"
+                <MyInput style={{
+                    marginLeft: 'auto', marginRight: '16px',
+                    width: '55px'
+                }} type="text" inputMode="decimal" pattern="\d*"
                          value={averageEuro} onChange={(e) => setAverageEuro(e.target.value)}/>
             </div>
             <h5 className="currency_label">USDT</h5>
             <div className="field_container">
-                <MyInput type="text" inputMode="decimal" pattern="\d*"
+                <MyInput style={{marginLeft: '16px'}} type="text" inputMode="decimal" pattern="\d*"
                          value={usdt} onChange={(e) => setUsdt(e.target.value)}/>
-                <MyInput style={{width: '55px'}} type="text" inputMode="decimal" pattern="\d*"
+                <MyInput style={{
+                    marginLeft: 'auto', marginRight: '16px',
+                    width: '55px'
+                }} type="text" inputMode="decimal" pattern="\d*"
                          value={averageUsdt} onChange={(e) => setAverageUsdt(e.target.value)}/>
             </div>
             <div className="decision_buttons_container">

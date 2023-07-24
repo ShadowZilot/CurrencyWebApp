@@ -11,6 +11,7 @@ import MySelect from "../components/UI/my_select/MySelect";
 import AverageRate from "../API/AverageRate";
 
 const EditSaleDeal = () => {
+    const [isEdit, setIsEdit] = useState(false)
     const router = useNavigate()
     const {id} = useParams()
     const [amount, setAmount] = useState(0)
@@ -19,14 +20,16 @@ const EditSaleDeal = () => {
     const [time, setTime] = useState(0)
     const [average, setAverage] = useState(0)
     useEffect(() => {
-        async function fetchAverageRate() {
-            const tmp = await AverageRate.rate(currency.toLowerCase())
-            setAverage(tmp)
-        }
+        if (isEdit) {
+            async function fetchAverageRate() {
+                const tmp = await AverageRate.rate(currency.toLowerCase())
+                setAverage(tmp)
+            }
 
-        fetchAverageRate().then(r => {
-        })
-    }, [currency])
+            fetchAverageRate().then(r => {
+            })
+        }
+    }, [currency, isEdit])
     useEffect(() => {
         MainButton.setActionToMainButton(() => {
             EditTransaction.editSale(
@@ -55,11 +58,15 @@ const EditSaleDeal = () => {
         setRate(response.rate)
         setCurrency(response.currency)
         setTime(response.transaction_date)
-        let isCanEdit = await EditTransaction.isCanEdit(response.transaction_date)
-        if (isCanEdit.is_edit) {
-            Telegram.WebApp.MainButton.show()
-            Telegram.WebApp.MainButton.setText("Применить")
-        }
+        EditTransaction.isCanEdit(response.transaction_date).then((value) => {
+            setIsEdit(value.is_edit)
+            if (value.is_edit) {
+                Telegram.WebApp.MainButton.show()
+                Telegram.WebApp.MainButton.setText("Применить")
+            } else {
+                setAverage(response.rate - response.profit_rate)
+            }
+        })
     })
     return (
         <div className="edit_sale_main">
@@ -92,12 +99,12 @@ const EditSaleDeal = () => {
                                     marginLeft: 'auto', width: '100%',
                                     boxShadow: 'none', borderWidth: 0,
                                     boxSizing: 'border-box', height: '100%'
-                                }} inputMode="numeric" value={amount}
+                                }} inputMode="numeric" disabled={!isEdit} value={amount}
                                          onChange={(e) => setAmount(e.target.value)}/>
                                 <MySelect style={{
                                     height: 'auto', marginLeft: 'auto',
                                     verticalAlign: 'center', width: '40%'
-                                }} value={currency} onChange={(e) => setCurrency(e.target.value)}>,
+                                }} value={currency} disabled={!isEdit} onChange={(e) => setCurrency(e.target.value)}>,
                                     <option value="usd">USD</option>
                                     <option value="eur">EUR</option>
                                     <option value="ust">USDT</option>
@@ -106,7 +113,7 @@ const EditSaleDeal = () => {
                             <MyInput style={{
                                 width: '20%', marginLeft: '1.5em',
                                 marginRight: 'auto'
-                            }} value={rate}
+                            }} value={rate} disabled={!isEdit}
                                      onChange={(e) => setRate((e.target.value))}/>
                         </div>
                         <p style={{fontSize: '1em', fontWeight: '500'}}>Сумма в
@@ -121,6 +128,24 @@ const EditSaleDeal = () => {
                                 fontSize: '1em',
                                 fontWeight: '500'
                             }}>({(rate - average).toFixed(2)})</p>
+                            {isEdit ? <span className="material-symbols-outlined"
+                                            style={{marginLeft: 'auto', marginTop: '0.5em'}}
+                                            onClick={(e) => Telegram.WebApp.showConfirm(
+                                                "Вы действительно хотите удалить сделку?",
+                                                (result) => {
+                                                    if (result) {
+                                                        EditTransaction.deleteDeal(
+                                                            id,
+                                                            "sale"
+                                                        ).then(() => {
+                                                            Telegram.WebApp.showAlert("Сделка удалена!")
+                                                            router(-1)
+                                                        })
+                                                    }
+                                                }
+                                            )}>
+                            delete
+                        </span> : <div></div>}
                         </div>
                     </div>
                 </div>

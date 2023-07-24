@@ -9,12 +9,14 @@
 }
 
 .currency_label {
+    margin-top: 0.5em;
     margin-left: 16px;
     margin-bottom: 0;
 }
 
 .field_container {
     display: flex;
+    margin-top: 0.5em;
     flex-direction: row;
     align-items: baseline;
     justify-content: flex-start;

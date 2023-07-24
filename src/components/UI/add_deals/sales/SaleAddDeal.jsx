@@ -6,6 +6,7 @@ import MainButton from "../../../../helpers/MainButton";
 import AddService from "../../../../API/AddService";
 import cl from "./SaleAddDeal.module.css"
 import AverageRate from "../../../../API/AverageRate";
+import MySelect from "../../my_select/MySelect";
 
 const SaleAddDeal = () => {
     const [amount, setAmount] = useState(0)
@@ -39,18 +40,18 @@ const SaleAddDeal = () => {
         <div>
             <h4 className={cl.sale_add_deal_title}>Сумма продажи</h4>
             <div>
-                <MyInput value={amount} inputMode="numeric"
+                <MyInput style={{marginLeft: '16px'}} value={amount} inputMode="numeric"
                          onChange={(e) => setAmount(e.target.value)}></MyInput>
-                <select value={currency}
+                <MySelect style={{width: '4.875em'}} value={currency}
                         onChange={(e) => setCurrency(e.target.value)}>
                     <option value="usd">USD</option>
                     <option value="eur">EUR</option>
                     <option value="ust">USDT</option>
-                </select>
+                </MySelect>
             </div>
             <h4 className={cl.sale_add_deal_title}>По курсу</h4>
             <div className={cl.sale_input_container}>
-                <MyInput value={saleRate} inputMode="decimal"
+                <MyInput style={{marginLeft: '16px'}} value={saleRate} inputMode="decimal"
                          onChange={(e) => setRate(e.target.value)}></MyInput>
                 { saleRate !== 0 ? <p>{(saleRate - average).toFixed(2)}</p> : <div></div>}
             </div>

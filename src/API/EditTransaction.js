@@ -2,6 +2,20 @@ import axios from "axios";
 import {base_url} from "./APIBase";
 
 export default class EditTransaction {
+    static async deleteDeal(dealId, dealType) {
+        await axios.post(
+            `${base_url}/transactions/delete`,
+            {
+                id: dealId,
+                deal_type: dealType
+            },
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            }
+        )
+    }
 
     static async isCanEdit(transactionTime) {
         return (await axios.post(

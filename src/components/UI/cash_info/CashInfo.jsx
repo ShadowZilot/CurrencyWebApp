@@ -4,18 +4,18 @@ import CashService from "../../../API/CashService";
 import {useFetching} from "../../../hooks/useFetching";
 import {useNavigate} from "react-router-dom";
 
-const CashInfo = () => {
+const CashInfo = (props) => {
 
-    const today = new Date()
+    const today = props.cash.time
     const [loadedCash, setCash] = useState({})
     const [profit, setProfit] = useState(1)
     const [cash, isLoading, error] = useFetching(async () => {
-        const response = await CashService.cashInfo(Date.now())
+        const response = await CashService.cashInfo(today)
         setCash(response)
     })
     const router = useNavigate()
     const [loadProfit, isLoadingProfit, errorProfit] = useFetching(async () => {
-        const response = await CashService.profit(Date.now())
+        const response = await CashService.profit(today)
         setProfit(response)
     })
 
@@ -31,9 +31,14 @@ const CashInfo = () => {
                 isLoading && isLoadingProfit ? <h4>Загрузка...</h4> : <div className={cl.info_block}>
                     <div className={cl.date_block}>
                         <h3 className={cl.date_title}>{new Intl.DateTimeFormat("ru-RU").format(today)}</h3>
-                        <div>
+                        <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
                         <span className="material-symbols-outlined" onClick={(e) => router('/edit_cash')}>
                                 edit
+                        </span>
+                            <span className="material-symbols-outlined"
+                                  style={{marginLeft: 'auto'}}
+                                  onClick={(e) => router('/history')}>
+                            history
                         </span>
                         </div>
                     </div>
@@ -72,7 +77,7 @@ const CashInfo = () => {
                             {...loadedCash.current_cash}["total_ruble"])}`}</p>
                     </div>
                     <hr className={cl.cash_divider}/>
-                    <p>{`Прибыль: ${profit}`}</p>
+                    <p>{`Прибыль: ${Intl.NumberFormat("ru-RU").format(profit)}`}</p>
                 </div>
             }
         </div>

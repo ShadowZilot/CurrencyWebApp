@@ -24,22 +24,22 @@ const EditMixingDeal = () => {
         setTime(response.transaction_date)
     })
     useEffect(() => {
-            MainButton.setActionToMainButton(() => {
-                EditTransaction.editMixing(
-                    {
-                        "id": id,
-                        "dealer": Telegram.WebApp.initDataUnsafe.user.username,
-                        "amount": amount,
-                        "profit": profit,
-                        "currency": currency.toLowerCase(),
-                        "comment": "",
-                        "transaction_date": time
-                    }
-                ).then(() => {
-                    Telegram.WebApp.showAlert("Сделка отредактирована")
-                    router(-1)
-                })
+        MainButton.setActionToMainButton(() => {
+            EditTransaction.editMixing(
+                {
+                    "id": id,
+                    "dealer": Telegram.WebApp.initDataUnsafe.user.username,
+                    "amount": amount,
+                    "profit": profit,
+                    "currency": currency.toLowerCase(),
+                    "comment": "",
+                    "transaction_date": time
+                }
+            ).then(() => {
+                Telegram.WebApp.showAlert("Сделка отредактирована")
+                router(-1)
             })
+        })
     }, [amount, currency, profit])
     useEffect(() => {
         Telegram.WebApp.MainButton.show()
@@ -89,10 +89,30 @@ const EditMixingDeal = () => {
                                 </MySelect>
                             </div>
                         </div>
-                        <MyInput style={{height: '2.625em', width: '100%',
-                            marginTop: '1em', boxSizing: 'border-box'}} inputMode="numeric"
+                        <MyInput style={{
+                            height: '2.625em', width: '100%',
+                            marginTop: '1em', boxSizing: 'border-box'
+                        }} inputMode="numeric"
                                  value={profit}
                                  onChange={(e) => setProfit(e.target.value)}/>
+                        <span className="material-symbols-outlined"
+                              style={{marginLeft: 'auto', marginTop: '0.5em'}}
+                              onClick={(e) => Telegram.WebApp.showConfirm(
+                                  "Вы действительно хотите удалить сделку?",
+                                  (result) => {
+                                      if (result) {
+                                          EditTransaction.deleteDeal(
+                                              id,
+                                              "mixing"
+                                          ).then(() => {
+                                              Telegram.WebApp.showAlert("Сделка удалена!")
+                                              router(-1)
+                                          })
+                                      }
+                                  }
+                              )}>
+                            delete
+                        </span>
                     </div>
                 </div>
             }
