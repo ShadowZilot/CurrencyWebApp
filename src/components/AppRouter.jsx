@@ -9,7 +9,6 @@ import EditMixingDeal from "../pages/EditMixingDeal";
 import EditSaleDeal from "../pages/EditSaleDeal";
 import HistoryPage from "../pages/HistoryPage";
 
-
 const AppRouter = () => {
 
     const location = useLocation()
