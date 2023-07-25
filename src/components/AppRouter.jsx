@@ -17,7 +17,7 @@ const AppRouter = () => {
 
     useEffect(() => {
         Telegram.WebApp.MainButton.setText("Записать сделку")
-        if (location.pathname === "/") {
+        if (location.pathname === "/day") {
             Telegram.WebApp.BackButton.hide()
             Telegram.WebApp.MainButton.show()
             MainButton.setActionToMainButton(() => {
@@ -26,7 +26,6 @@ const AppRouter = () => {
             )
         } else {
             Telegram.WebApp.BackButton.show()
-            Telegram.WebApp.MainButton.hide()
         }
     }, [location])
 
@@ -38,14 +37,16 @@ const AppRouter = () => {
 
     return (
         <Routes>
-            <Route path="/" element={<MainScreen/>}/>
+            <Route path="/day">
+                <Route index={true} element={<MainScreen/>}/>
+                <Route index={false} path=":time" element={<MainScreen/>}/>
+            </Route>
             <Route path="/edit_cash" element={<EditCash/>}/>
             <Route path="/add_deal" element={<AddDealScreen/>}/>
             <Route path="/edit_purchase/:id" element={<EditPurchaseDeal/>}/>
             <Route path="/edit_mixing/:id" element={<EditMixingDeal/>}/>
             <Route path="/edit_sale/:id" element={<EditSaleDeal/>}/>
             <Route path="/history" element={<HistoryPage/>}/>
-            <Route path="/day/:time" element={<MainScreen/>}/>
         </Routes>
     );
 };

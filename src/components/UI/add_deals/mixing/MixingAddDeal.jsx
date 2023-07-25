@@ -12,6 +12,7 @@ const MixingAddDeal = () => {
     const router = useNavigate()
     const [profit, setProfit] = useState(0)
     useEffect(() => {
+        Telegram.WebApp.MainButton.show()
         MainButton.setActionToMainButton(() => {
             AddService.addMixingDeal(
                 {

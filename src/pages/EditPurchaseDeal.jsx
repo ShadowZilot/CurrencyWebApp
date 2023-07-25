@@ -49,6 +49,8 @@ const EditPurchaseDeal = () => {
         if (isCanEdit.is_edit) {
             Telegram.WebApp.MainButton.show()
             Telegram.WebApp.MainButton.setText("Применить")
+        } else {
+            Telegram.WebApp.MainButton.hide()
         }
     })
     return (

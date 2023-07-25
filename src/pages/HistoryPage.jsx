@@ -14,6 +14,7 @@ const HistoryPage = () => {
         setHistory(response)
     })
     useEffect(() => {
+        Telegram.WebApp.MainButton.hide()
         loadHistory()
     }, [year])
 

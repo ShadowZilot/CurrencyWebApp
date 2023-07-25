@@ -19,9 +19,12 @@ const SaleAddDeal = () => {
             const tmp = await AverageRate.rate(currency.toLowerCase())
             setAverage(tmp)
         }
-        fetchAverageRate().then(r => {})
+
+        fetchAverageRate().then(r => {
+        })
     }, [currency])
     useEffect(() => {
+        Telegram.WebApp.MainButton.show()
         MainButton.setActionToMainButton(() => {
             AddService.addSaleDeal(
                 {
@@ -43,7 +46,7 @@ const SaleAddDeal = () => {
                 <MyInput style={{marginLeft: '16px'}} value={amount} inputMode="numeric"
                          onChange={(e) => setAmount(e.target.value)}></MyInput>
                 <MySelect style={{width: '4.875em'}} value={currency}
-                        onChange={(e) => setCurrency(e.target.value)}>
+                          onChange={(e) => setCurrency(e.target.value)}>
                     <option value="usd">USD</option>
                     <option value="eur">EUR</option>
                     <option value="ust">USDT</option>
@@ -53,10 +56,13 @@ const SaleAddDeal = () => {
             <div className={cl.sale_input_container}>
                 <MyInput style={{marginLeft: '16px'}} value={saleRate} inputMode="decimal"
                          onChange={(e) => setRate(e.target.value)}></MyInput>
-                { saleRate !== 0 ? <p>{(saleRate - average).toFixed(2)}</p> : <div></div>}
+                {saleRate !== 0 ? <p style={{marginLeft: '1em'}}>{(saleRate - average).toFixed(2)}</p> : <div></div>}
             </div>
-            <h3 className={cl.sale_add_deal_title}>Сумма рубля: {Intl.NumberFormat("ru-RU").format(amount * saleRate)}</h3>
-            {saleRate !== 0 ? <h3 className={cl.sale_add_deal_title}>Прибыль: {Intl.NumberFormat("ru-RU").format(amount * (saleRate - average))}</h3> : <div/>}
+            <h3 className={cl.sale_add_deal_title}>Сумма
+                рубля: {Intl.NumberFormat("ru-RU").format(amount * saleRate)}</h3>
+            {saleRate !== 0 ?
+                <h3 className={cl.sale_add_deal_title}>Прибыль: {Intl.NumberFormat("ru-RU").format(amount * (saleRate - average))}</h3> :
+                <div/>}
         </div>
     );
 };

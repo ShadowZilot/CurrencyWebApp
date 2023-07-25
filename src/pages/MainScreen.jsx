@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import CashInfo from "../components/UI/cash_info/CashInfo";
 import DealSelector from "../components/UI/deals_selector/DealSelector";
 import DealsList from "../components/deals_list/DealsList";

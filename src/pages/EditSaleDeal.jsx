@@ -64,6 +64,7 @@ const EditSaleDeal = () => {
                 Telegram.WebApp.MainButton.show()
                 Telegram.WebApp.MainButton.setText("Применить")
             } else {
+                Telegram.WebApp.MainButton.hide()
                 setAverage(response.rate - response.profit_rate)
             }
         })

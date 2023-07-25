@@ -3,12 +3,30 @@ import cl from "./CashInfo.module.css"
 import CashService from "../../../API/CashService";
 import {useFetching} from "../../../hooks/useFetching";
 import {useNavigate} from "react-router-dom";
+import History from "../../../API/History";
+import MainButton from "../../../helpers/MainButton";
 
 const CashInfo = (props) => {
 
     const today = props.cash.time
     const [loadedCash, setCash] = useState({})
     const [profit, setProfit] = useState(1)
+    const [isCanAdd, setIsCadAdd] = useState()
+    const [computeCanAdd, loagingCanAdd, canAddError] = useFetching(async () => {
+        if (Date.now() - today > 5000) {
+            let canAddResult = await History.isCanAdd(today)
+            setIsCadAdd(canAddResult.can_add)
+            if (canAddResult.can_add === true) {
+                Telegram.WebApp.MainButton.show()
+                MainButton.setActionToMainButton(() => {
+                        router("/add_deal")
+                    }
+                )
+            } else {
+                Telegram.WebApp.MainButton.hide()
+            }
+        }
+    })
     const [cash, isLoading, error] = useFetching(async () => {
         const response = await CashService.cashInfo(today)
         setCash(response)
@@ -20,6 +38,7 @@ const CashInfo = (props) => {
     })
 
     useEffect(() => {
+        computeCanAdd()
         cash().then(r => {
         })
         loadProfit().then(r => {
@@ -32,9 +51,10 @@ const CashInfo = (props) => {
                     <div className={cl.date_block}>
                         <h3 className={cl.date_title}>{new Intl.DateTimeFormat("ru-RU").format(today)}</h3>
                         <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
-                        <span className="material-symbols-outlined" onClick={(e) => router('/edit_cash')}>
+                            {isCanAdd ?
+                                <span className="material-symbols-outlined" onClick={(e) => router('/edit_cash')}>
                                 edit
-                        </span>
+                        </span> : <div></div>}
                             <span className="material-symbols-outlined"
                                   style={{marginLeft: 'auto'}}
                                   onClick={(e) => router('/history')}>

@@ -12,6 +12,7 @@ const PurchaseAddDeal = () => {
     const [currency, setCurrency] = useState("usd")
     const router = useNavigate()
     useEffect(() => {
+        Telegram.WebApp.MainButton.show()
         MainButton.setActionToMainButton(() => {
             AddService.addPurchaseDeal(
                 {
