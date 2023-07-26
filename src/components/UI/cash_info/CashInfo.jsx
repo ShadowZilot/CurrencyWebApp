@@ -51,7 +51,7 @@ const CashInfo = (props) => {
                     <div className={cl.date_block}>
                         <h3 className={cl.date_title}>{new Intl.DateTimeFormat("ru-RU").format(today)}</h3>
                         <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
-                            {isCanAdd ?
+                            {isCanAdd || Date.now() - today < 5000 ?
                                 <span className="material-symbols-outlined" onClick={(e) => router('/edit_cash')}>
                                 edit
                         </span> : <div></div>}
