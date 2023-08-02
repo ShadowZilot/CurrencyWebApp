@@ -26,6 +26,7 @@ const EditCash = () => {
         setAverageUsdt({...response.current_cash}["average_usdt"])
     })
     useEffect(() => {
+        Telegram.WebApp.MainButton.hide()
         cash().then(r => {
         })
     }, [])

@@ -8,17 +8,17 @@ import MySelect from "../../my_select/MySelect";
 
 const MixingAddDeal = () => {
     const [amount, setAmount] = useState(0)
-    const [currency, setCurrency] = useState("rub")
+    const [currency, setCurrency] = useState("+rub")
     const router = useNavigate()
     const [profit, setProfit] = useState(0)
     const [comment, setComment] = useState("")
     useEffect(() => {
         Telegram.WebApp.MainButton.show()
-        if (currency === "rub") {
+        if (currency.includes("rub")) {
             MainButton.setActionToMainButton(() => {
                 AddService.addRubleTransaction(
                     {
-                        "amount": +amount,
+                        "amount": currency === "+rub" ? +amount : -amount,
                         "comment": comment
                     }
                 ).then(r => router(-1))
@@ -40,22 +40,23 @@ const MixingAddDeal = () => {
 
     return (
         <div>
-            <h4 className={cl.sale_add_deal_title}>Сумма {currency === "rub" ? `рубля` : `сделки`}</h4>
+            <h4 className={cl.sale_add_deal_title}>Сумма {currency.includes("rub") ? `рубля` : `сделки`}</h4>
             <div>
                 <MyInput style={{marginLeft: '16px'}} value={amount} type="text" inputMode="numeric"
                          onChange={(e) => setAmount(e.target.value)}></MyInput>
                 <MySelect style={{width: '4.875em'}} value={currency}
                           onChange={(e) => setCurrency(e.target.value)}>
-                    <option value="rub">RUB</option>
+                    <option value="+rub">+RUB</option>
+                    <option value="-rub">-RUB</option>
                     <option value="usd">USD</option>
                     <option value="eur">EUR</option>
                     <option value="ust">USDT</option>
                 </MySelect>
             </div>
-            <h4 className={cl.sale_add_deal_title}>{currency === "rub" ? `Комментарий` : `Прибыль`}</h4>
+            <h4 className={cl.sale_add_deal_title}>{currency.includes("rub") ? `Комментарий` : `Прибыль`}</h4>
             <div className={cl.sale_input_container}>
                 {
-                    currency !== "rub" ? <MyInput style={{marginLeft: '16px'}} value={profit} inputMode="decimal"
+                    !currency.includes("rub") ? <MyInput style={{marginLeft: '16px'}} value={profit} inputMode="decimal"
                                                   onChange={(e) => setProfit(e.target.value)}></MyInput> :
                         <MyInput style={{
                             marginLeft: '16px', marginRight: '16px',

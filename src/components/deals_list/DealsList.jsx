@@ -6,9 +6,11 @@ import BuyItem from "../UI/buy_item/BuyItem";
 import SaleItem from "../UI/sale_item/SaleItem";
 import MixingItem from "../UI/mixing_item/MixingItem";
 import RubleItem from "../UI/ruble_item/RubleItem";
+import MySelect from "../UI/my_select/MySelect";
 
 const DealsList = (props) => {
     const [dealList, setDealList] = useState([])
+    const [elseType, setElseType] = useState("mixing")
     const [loadDealList, isLoadingList, errorList] = useFetching(async () => {
         let response = []
         if (props.selectedType === 0) {
@@ -16,28 +18,36 @@ const DealsList = (props) => {
         } else if (props.selectedType === 1) {
             response = await DealLists.salesList(props.time)
         } else if (props.selectedType === 2) {
-            response.push(...(await DealLists.rublesList(props.time)))
-            response.push(...(await DealLists.mixingList(props.time)))
-            response.sort((a, b) => {
-                let sortResult = 0
-                if (a.transaction_date > b.transaction_date) {
-                    sortResult = -1
-                }
-                if (a.transaction_date < b.transaction_date) {
-                    sortResult = 1
-                }
-                return sortResult
-            })
+            if (elseType === "mixing") {
+                response.push(...(await DealLists.mixingList(props.time)))
+            }
+            if (elseType === "ruble") {
+                response.push(...(await DealLists.rublesList(props.time)))
+            }
         }
         setDealList(response)
     })
 
     useEffect(() => {
         loadDealList()
-    }, [props.selectedType])
+    }, [props.selectedType, elseType])
 
     return (
         <div className={cl.list_container}>
+            {
+                !isLoadingList && props.selectedType === 2 ? <div style={{
+                        width: '100%', display: 'flex',
+                        flexDirection: 'row'
+                    }}>
+                        <MySelect style={{width: '7em', marginLeft: 'auto'}}
+                                  value={elseType} onChange={(e) => setElseType(e.target.value)}>
+                            <option value="mixing">Сделки</option>
+                            <option value="ruble">Рубль</option>
+                        </MySelect>
+                    </div>
+                    :
+                    <div></div>
+            }
             {
                 isLoadingList ? <h4>Загрузка...</h4> : <div>
                     {dealList.length === 0 ? <h4>Сделок не было</h4> :
