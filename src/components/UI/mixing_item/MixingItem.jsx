@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 const MixingItem = (props) => {
     const router = useNavigate()
     return (
-        <div onClick={() => router(`/edit_mixing/${props.mixing.id}`)}>
+        <div onClick={() => router(`/edit_mixing/${props.mixing.id}/mixing`)}>
             <div className={cl.main_mixing_container}>
                 <div className={cl.inner_mixing_container}>
                     <div className={cl.mixing_container}>

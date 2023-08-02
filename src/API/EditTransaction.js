@@ -66,4 +66,16 @@ export default class EditTransaction {
             }
         )
     }
+
+    static async editRuble(rubleData) {
+        await axios.post(
+            `${base_url}/transactions/edit/ruble`,
+            rubleData,
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            }
+        )
+    }
 }

@@ -47,4 +47,19 @@ export default class DealLists {
         )
         return response.data.mixing
     }
+
+    static async rublesList(currentDate) {
+        const response = await axios.post(
+            `${base_url}/transactions/rubles`,
+            {
+                date: currentDate
+            },
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            }
+        )
+        return response.data.ruble_edits
+    }
 }

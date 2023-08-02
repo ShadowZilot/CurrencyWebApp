@@ -1,11 +1,11 @@
-.mixing_container {
+.ruble_container {
     position: relative;
     float: left;
     width: 100%;
     flex-wrap: nowrap;
 }
 
-.mixing_item_text {
+.ruble_item_text {
     margin: 0 0 0 0;
     padding: 0;
 }
@@ -29,22 +29,22 @@
     float: left;
 }
 
-.mixing_bottom_text {
+.ruble_bottom_text {
     margin: 0 0 0 0.2em;
     padding: 0;
-    border-top: var(--tg-theme-text-color) solid 0.04em;
-    font-weight: bold;
+    border-top: var(--tg-theme-text-color)  solid 0.04em;
+    font-size: 0.7em;
     width: fit-content;
 }
 
-.inner_mixing_container {
+.inner_ruble_container {
     width: fit-content;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.main_mixing_container {
+.main_ruble_container {
     display: flex;
     position: relative;
     left: 0;

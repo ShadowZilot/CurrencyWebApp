@@ -44,7 +44,7 @@ const AppRouter = () => {
             <Route path="/edit_cash" element={<EditCash/>}/>
             <Route path="/add_deal" element={<AddDealScreen/>}/>
             <Route path="/edit_purchase/:id" element={<EditPurchaseDeal/>}/>
-            <Route path="/edit_mixing/:id" element={<EditMixingDeal/>}/>
+            <Route path="/edit_mixing/:id/:type" element={<EditMixingDeal/>}/>
             <Route path="/edit_sale/:id" element={<EditSaleDeal/>}/>
             <Route path="/history" element={<HistoryPage/>}/>
         </Routes>

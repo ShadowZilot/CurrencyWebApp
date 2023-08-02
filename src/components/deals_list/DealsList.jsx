@@ -5,6 +5,7 @@ import cl from "./DealsList.module.css"
 import BuyItem from "../UI/buy_item/BuyItem";
 import SaleItem from "../UI/sale_item/SaleItem";
 import MixingItem from "../UI/mixing_item/MixingItem";
+import RubleItem from "../UI/ruble_item/RubleItem";
 
 const DealsList = (props) => {
     const [dealList, setDealList] = useState([])
@@ -15,7 +16,18 @@ const DealsList = (props) => {
         } else if (props.selectedType === 1) {
             response = await DealLists.salesList(props.time)
         } else if (props.selectedType === 2) {
-            response = await DealLists.mixingList(props.time)
+            response.push(...(await DealLists.rublesList(props.time)))
+            response.push(...(await DealLists.mixingList(props.time)))
+            response.sort((a, b) => {
+                let sortResult = 0
+                if (a.transaction_date > b.transaction_date) {
+                    sortResult = -1
+                }
+                if (a.transaction_date < b.transaction_date) {
+                    sortResult = 1
+                }
+                return sortResult
+            })
         }
         setDealList(response)
     })
@@ -41,9 +53,12 @@ const DealsList = (props) => {
                                 ) : <div></div>
                             }
                             {
-                                props.selectedType === 2 ? dealList.map((item) =>
-                                    <MixingItem key={item.id} mixing={item}/>
-                                ) : <div></div>
+                                props.selectedType === 2 ? dealList.map((item) => {
+                                    console.log(item.currency)
+                                    return item.currency !== undefined ?
+                                        <MixingItem key={item.id} mixing={item}/> :
+                                        <RubleItem key={item.id} ruble={item}/>
+                                }) : <div></div>
                             }
                         </div>
                     }

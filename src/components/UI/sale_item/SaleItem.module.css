@@ -32,7 +32,7 @@
 .sale_bottom_text {
     margin: 0 0 0 0.2em;
     padding: 0;
-    border-top: white solid 0.04em;
+    border-top: var(--tg-theme-text-color) solid 0.04em;
     font-weight: bold;
     width: fit-content;
 }

@@ -37,4 +37,16 @@ export default class AddService {
             }
         )
     }
+
+    static async addRubleTransaction(rubleObj) {
+        await axios.post(
+            `${base_url}/transaction/add/ruble`,
+            rubleObj,
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            }
+        )
+    }
 }
