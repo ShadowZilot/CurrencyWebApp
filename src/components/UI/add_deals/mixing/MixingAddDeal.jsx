@@ -18,7 +18,7 @@ const MixingAddDeal = () => {
             MainButton.setActionToMainButton(() => {
                 AddService.addRubleTransaction(
                     {
-                        "amount": amount,
+                        "amount": +amount,
                         "comment": comment
                     }
                 ).then(r => router(-1))
@@ -28,8 +28,8 @@ const MixingAddDeal = () => {
                 AddService.addMixingDeal(
                     {
                         "dealer": Telegram.WebApp.initDataUnsafe.user.username,
-                        "amount": amount,
-                        "profit": profit,
+                        "amount": +amount,
+                        "profit": +profit,
                         "currency": currency.toLowerCase(),
                         "comment": ""
                     }
@@ -42,7 +42,7 @@ const MixingAddDeal = () => {
         <div>
             <h4 className={cl.sale_add_deal_title}>Сумма {currency === "rub" ? `рубля` : `сделки`}</h4>
             <div>
-                <MyInput style={{marginLeft: '16px'}} value={amount} type="number"
+                <MyInput style={{marginLeft: '16px'}} value={amount} type="text" inputMode="numeric"
                          onChange={(e) => setAmount(e.target.value)}></MyInput>
                 <MySelect style={{width: '4.875em'}} value={currency}
                           onChange={(e) => setCurrency(e.target.value)}>

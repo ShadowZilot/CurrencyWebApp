@@ -41,8 +41,8 @@ const EditMixingDeal = () => {
                     if (type === "ruble") {
                         EditTransaction.editRuble(
                             {
-                                "id": id,
-                                "amount": amount,
+                                "id": +id,
+                                "amount": +amount,
                                 "comment": comment,
                                 "transaction_date": time
                             }
@@ -53,9 +53,9 @@ const EditMixingDeal = () => {
                     } else {
                         EditTransaction.editMixing(
                             {
-                                "id": id,
+                                "id": +id,
                                 "dealer": Telegram.WebApp.initDataUnsafe.user.username,
-                                "amount": amount,
+                                "amount": +amount,
                                 "profit": profit,
                                 "currency": currency.toLowerCase(),
                                 "comment": "",
@@ -106,7 +106,7 @@ const EditMixingDeal = () => {
                                         marginLeft: 'auto', width: '100%',
                                         boxShadow: 'none', borderWidth: 0,
                                         boxSizing: 'border-box', height: '100%'
-                                    }} type="number" value={amount}
+                                    }} type="text" inputMode="numeric" value={amount}
                                              onChange={(e) => setAmount(e.target.value)}/>
                                     {
                                         type === "mixing" ? <MySelect style={{
