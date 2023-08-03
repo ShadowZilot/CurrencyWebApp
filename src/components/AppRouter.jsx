@@ -8,6 +8,7 @@ import EditPurchaseDeal from "../pages/EditPurchaseDeal";
 import EditMixingDeal from "../pages/EditMixingDeal";
 import EditSaleDeal from "../pages/EditSaleDeal";
 import HistoryPage from "../pages/HistoryPage";
+import EditDollarProfit from "../pages/EditDollarProfit";
 
 
 const AppRouter = () => {
@@ -47,6 +48,7 @@ const AppRouter = () => {
             <Route path="/edit_mixing/:id/:type" element={<EditMixingDeal/>}/>
             <Route path="/edit_sale/:id" element={<EditSaleDeal/>}/>
             <Route path="/history" element={<HistoryPage/>}/>
+            <Route path="/edit_dollar/:time" element={<EditDollarProfit/>}/>
         </Routes>
     );
 };

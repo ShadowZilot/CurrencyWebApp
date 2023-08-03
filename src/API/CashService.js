@@ -30,6 +30,38 @@ export default class CashService {
         return response.data
     }
 
+    static async dollarProfit(currentDate) {
+        const response = await axios.post(
+            `${base_url}/dollar_profit`,
+            {
+                dollar_date: currentDate
+            },
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            }
+        ).catch((error) => {
+        })
+        return response.data.profit
+    }
+
+    static async saveDollarProfit(profit, currentDate) {
+        await axios.post(
+            `${base_url}/dollar_profit/update`,
+            {
+                profit: profit,
+                dollar_date: currentDate
+            },
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            }
+        ).catch((error) => {
+        })
+    }
+
     static async cashInfo(currentDate) {
         const response = await axios.post(
             `${base_url}/cash`,

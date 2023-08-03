@@ -11,6 +11,7 @@ const CashInfo = (props) => {
     const today = props.cash.time
     const [loadedCash, setCash] = useState({})
     const [profit, setProfit] = useState(1)
+    const [dollarProfit, setDollarProfit] = useState(1)
     const [isCanAdd, setIsCadAdd] = useState()
     const [computeCanAdd, loagingCanAdd, canAddError] = useFetching(async () => {
         if (Date.now() - today > 5000) {
@@ -35,6 +36,7 @@ const CashInfo = (props) => {
     const [loadProfit, isLoadingProfit, errorProfit] = useFetching(async () => {
         const response = await CashService.profit(today)
         setProfit(response)
+        setDollarProfit(await CashService.dollarProfit(today))
     })
 
     useEffect(() => {
@@ -98,6 +100,24 @@ const CashInfo = (props) => {
                     </div>
                     <hr className={cl.cash_divider}/>
                     <p>{`Прибыль: ${Intl.NumberFormat("ru-RU").format(profit)}`}</p>
+                    <div style={{
+                        display: 'flex', flexDirection: 'row',
+                        marginTop: '0',
+                        marginBottom: '0',
+                        height: "2em"
+                    }}>
+                        <p style={{
+                            height: '100%',
+                            marginRight: '1em',
+                            marginBottom: '0',
+                            marginTop: '0.3em'
+                        }}>{`Прибыль в $: ${Intl.NumberFormat("ru-RU").format(dollarProfit)}`}</p>
+                        <span style={{margin: '0', marginBottom: '3em', alignSelf: 'baseline'}}
+                              className="material-symbols-outlined" onClick={(e) =>
+                            router(`/edit_dollar/${today}`)}>
+                                edit
+                        </span>
+                    </div>
                 </div>
             }
         </div>
