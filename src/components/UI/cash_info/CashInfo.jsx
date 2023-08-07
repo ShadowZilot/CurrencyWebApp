@@ -65,7 +65,15 @@ const CashInfo = (props) => {
                         </div>
                     </div>
                     <hr className={cl.cash_divider}/>
-                    <h4 className={cl.cash_title}>Начало дня</h4>
+                    <div style={{display: 'flex', flexDirection: 'row', margin: '0',
+                        padding: '0', flexWrap: 'nowrap', alignItems: 'baseline'}}>
+                        <span className="material-symbols-outlined"
+                              style={{marginRight: '0.3em'}}
+                              onClick={(e) => router(`/edit_cash/${today}`)}>
+                                edit
+                        </span>
+                        <h4 className={cl.cash_title}>Начало дня</h4>
+                    </div>
                     <div className={cl.cash_info}>
                         <p className={cl.cash_labels}>{`Рубль: ${Intl.NumberFormat("ru-RU").format(
                             {...loadedCash.begin_cash}["ruble"])}`}</p>

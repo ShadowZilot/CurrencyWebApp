@@ -4,9 +4,10 @@ import MyInput from "../components/UI/input/MyInput";
 import {useFetching} from "../hooks/useFetching";
 import CashService from "../API/CashService";
 import Button from "../components/UI/button/Button";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 const EditCash = () => {
+    const {time = -1} = useParams()
     const router = useNavigate()
     const [ruble, setRuble] = useState(0)
     const [dollar, setDollar] = useState(0)
@@ -15,15 +16,32 @@ const EditCash = () => {
     const [averageEuro, setAverageEuro] = useState(0)
     const [usdt, setUsdt] = useState(0)
     const [averageUsdt, setAverageUsdt] = useState(0)
+    const [cashId, setCashId] = useState(0)
+    const [cashTime, setCashTime] = useState(0)
     const [cash, isLoading, error] = useFetching(async () => {
-        const response = await CashService.currentCashInfo(Date.now())
-        setRuble({...response.current_cash}["ruble"])
-        setDollar({...response.current_cash}["dollar"])
-        setAverageDollar({...response.current_cash}["average_dollar"])
-        setEuro({...response.current_cash}["euro"])
-        setAverageEuro({...response.current_cash}["average_euro"])
-        setUsdt({...response.current_cash}["usdt"])
-        setAverageUsdt({...response.current_cash}["average_usdt"])
+        let response
+        if (time === -1) {
+            response = await CashService.currentCashInfo(Date.now())
+            setRuble({...response.current_cash}["ruble"])
+            setDollar({...response.current_cash}["dollar"])
+            setAverageDollar({...response.current_cash}["average_dollar"])
+            setEuro({...response.current_cash}["euro"])
+            setAverageEuro({...response.current_cash}["average_euro"])
+            setUsdt({...response.current_cash}["usdt"])
+            setAverageUsdt({...response.current_cash}["average_usdt"])
+        } else {
+            response = await CashService.firstCashInfo(time)
+            setCashId(response.id)
+            setCashTime(response.cash_date)
+            setRuble(response.ruble)
+            setDollar(response.dollar)
+            setAverageDollar(response.average_dollar)
+            setEuro(response.euro)
+            setAverageEuro(response.average_euro)
+            setUsdt(response.usdt)
+            setAverageUsdt(response.average_usdt)
+        }
+        console.log(response)
     })
     useEffect(() => {
         Telegram.WebApp.MainButton.hide()
@@ -32,21 +50,41 @@ const EditCash = () => {
     }, [])
 
     async function saveCash() {
-        await CashService.saveCashInfo(
-            {
-                ruble: ruble,
-                dollar: dollar,
-                average_dollar: averageDollar,
-                euro: euro,
-                average_euro: averageEuro,
-                usdt: usdt,
-                average_usdt: averageUsdt,
-                comment: ""
-            }
-        ).then((r) => {
-            Telegram.WebApp.showAlert("Касса изменена!")
-            router(-1)
-        })
+        if (time === -1) {
+            await CashService.saveCashInfo(
+                {
+                    ruble: ruble,
+                    dollar: dollar,
+                    average_dollar: averageDollar,
+                    euro: euro,
+                    average_euro: averageEuro,
+                    usdt: usdt,
+                    average_usdt: averageUsdt,
+                    comment: ""
+                }
+            ).then((r) => {
+                Telegram.WebApp.showAlert("Касса изменена!")
+                router(-1)
+            })
+        } else {
+            await CashService.updateFirstCash(
+                {
+                    id: cashId,
+                    ruble: ruble,
+                    dollar: dollar,
+                    average_dollar: averageDollar,
+                    euro: euro,
+                    average_euro: averageEuro,
+                    usdt: usdt,
+                    average_usdt: averageUsdt,
+                    comment: "",
+                    cash_time: cashTime
+                }
+            ).then((r) => {
+                Telegram.WebApp.showAlert("Касса изменена!")
+                router(-1)
+            })
+        }
     }
 
     return (

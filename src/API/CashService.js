@@ -15,6 +15,34 @@ export default class CashService {
         )
     }
 
+    static async firstCashInfo(currentDate) {
+        const response = await axios.post(
+            `${base_url}/cash/first`,
+            {
+                time: currentDate
+            },
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            }
+        )
+        return response.data
+    }
+
+    static async updateFirstCash(cashData) {
+        await axios.post(
+            `${base_url}/cash/first/update`,
+            cashData,
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            }
+        ).catch((error) => {
+        })
+    }
+
     static async currentCashInfo(currentDate) {
         const response = await axios.post(
             `${base_url}/cash`,

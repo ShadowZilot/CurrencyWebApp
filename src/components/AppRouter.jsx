@@ -42,7 +42,10 @@ const AppRouter = () => {
                 <Route index={true} element={<MainScreen/>}/>
                 <Route index={false} path=":time" element={<MainScreen/>}/>
             </Route>
-            <Route path="/edit_cash" element={<EditCash/>}/>
+            <Route path="/edit_cash">
+                <Route index={true} element={<EditCash/>}/>
+                <Route index={false} path=":time" element={<EditCash/>}/>
+            </Route>
             <Route path="/add_deal" element={<AddDealScreen/>}/>
             <Route path="/edit_purchase/:id" element={<EditPurchaseDeal/>}/>
             <Route path="/edit_mixing/:id/:type" element={<EditMixingDeal/>}/>
