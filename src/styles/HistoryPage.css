@@ -1,6 +1,8 @@
 .main_history_container {
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
     margin-left: 1em;
     margin-right: 1em;
     padding-bottom: 2em;
@@ -20,4 +22,12 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+}
+
+.swipable_month_container {
+    margin-top: 2em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-right: 0;
+    padding-left: 0;
 }

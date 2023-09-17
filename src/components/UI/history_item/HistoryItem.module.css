@@ -3,6 +3,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    overflow: visible;
 }
 
 .month_label {
@@ -34,5 +35,4 @@
     margin-top: -1.3em;
     padding-top: 0;
     background: var(--tg-theme-bg-color);
-    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
 }

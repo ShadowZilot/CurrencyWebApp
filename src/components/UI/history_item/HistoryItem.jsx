@@ -5,8 +5,10 @@ import DayItem from "../day_item/DayItem";
 const HistoryItem = (props) => {
     return (
         <div className={cl.main_container}>
-            <div style={{width: '100%', display: 'flex', flexDirection: 'row',
-                marginBottom: '0', paddingBottom: '0'}}>
+            <div style={{
+                width: '100%', display: 'flex', flexDirection: 'row',
+                marginBottom: '0', paddingBottom: '0'
+            }}>
                 <p className={cl.month_label}>{props.h_item.month}</p>
                 {props.h_item.month_profit !== 0 ?
                     <p className={cl.profit_label}>Прибыль: {Intl.NumberFormat("ru-RU").format(props.h_item.month_profit)}</p> :

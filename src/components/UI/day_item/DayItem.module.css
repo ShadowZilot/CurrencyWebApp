@@ -4,6 +4,15 @@
     flex-direction: column;
 }
 
+.main_container_selected {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    border-radius: 12px 12px 12px 12px;
+}
+
 .day_label {
     text-align: center;
     font-size: 0.94em;
