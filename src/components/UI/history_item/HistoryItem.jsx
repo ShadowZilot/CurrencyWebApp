@@ -11,7 +11,7 @@ const HistoryItem = (props) => {
             }}>
                 <p className={cl.month_label}>{props.h_item.month}</p>
                 {props.h_item.month_profit !== 0 ?
-                    <p className={cl.profit_label}>Прибыль: {Intl.NumberFormat("ru-RU").format(props.h_item.month_profit)}</p> :
+                    <p className={cl.profit_label}>Прибыль: {Intl.NumberFormat("ru-RU").format(props.h_item.month_profit)} $</p> :
                     <div></div>}
             </div>
             <div className={cl.days_container}>
